@@ -11,7 +11,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Reshaped theme="reshaped">
+      <Reshaped theme="reshaped" defaultColorMode="dark">
         <Component {...pageProps} />
       </Reshaped>
     </SessionProvider>
