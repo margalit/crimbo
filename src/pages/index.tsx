@@ -13,6 +13,7 @@ import {
   useTheme,
   Overlay,
   Link,
+  Placeholder,
 } from "reshaped";
 import {
   TrophyIcon,
@@ -25,6 +26,7 @@ import {
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import NextImage from "next/image";
+import HeroImage from "/public/hero.png";
 
 type Entries<T> = {
   [K in keyof T]: [K, T[K]];
@@ -36,35 +38,43 @@ const getEntries = <T extends object>(obj: T) =>
 const players = {
   samM: {
     name: "Sam M",
-    image: "/players/samM.jpeg",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/samM.jpeg",
   },
   rubyB: {
     name: "Ruby B",
-    image: "/players/rubyB.jpeg",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/rubyB.jpeg",
   },
   joL: {
     name: "Jo L",
-    image: "/players/joL.jpeg",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/joL.jpeg",
   },
   chrisV: {
     name: "Chris V",
-    image: "/players/chrisV.jpeg",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/chrisV.jpeg",
   },
   maxW: {
     name: "Max W",
-    image: "/players/maxW.png",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/maxW.png",
   },
   jessH: {
     name: "Jess H",
-    image: "/players/jessH.png",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/jessH.png",
   },
   chrisM: {
     name: "Chris M",
-    image: "/players/chrisM.png",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/chrisM.png",
   },
   patA: {
     name: "Pat A",
-    image: "/players/patA.png",
+    image:
+      "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/players/patA.png",
   },
 };
 
@@ -258,7 +268,7 @@ const Home: NextPage = () => {
           name="og:image"
           content={`${
             process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-          }/hero.jpeg`}
+          }/hero.png`}
         />
       </Head>
       <Container width="580px">
@@ -292,8 +302,8 @@ const Home: NextPage = () => {
                           <AspectRatio ratio={1}>
                             <NextImage
                               src={src}
-                              width={546}
-                              height={546}
+                              width={548}
+                              height={548}
                               alt="Discarded christmas tree"
                               priority={index <= 1}
                             />
@@ -360,13 +370,13 @@ const Home: NextPage = () => {
             </Tabs.Panel>
             <Tabs.Panel value="2">
               <View gap={6} paddingTop={4}>
-                <AspectRatio ratio={1.6}>
-                  <Image
-                    src="/hero.jpeg"
-                    borderRadius="large"
+                <View borderRadius="large" overflow="hidden">
+                  <NextImage
+                    src={HeroImage}
+                    width={548}
                     alt="Discarded christmas tree"
                   />
-                </AspectRatio>
+                </View>
                 <Text variant="title-3">
                   Crimbo is a game where each player tries to take photos of
                   discarded Christmas trees.
