@@ -110,7 +110,7 @@ const feed = [
   },
   {
     id: "12",
-    src: "/harvests/12.jpg",
+    src: "/harvests/12.jpeg",
     claimant: "jessH" as const,
     location: "Ballantyne St, Thornbury",
     points: 1,
