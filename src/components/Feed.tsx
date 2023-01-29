@@ -22,6 +22,14 @@ function pointsText(points: number) {
   }
 }
 
+function dateText(timestamp: string) {
+  const date = new Date(timestamp);
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    date
+  );
+  return `${month} ${date.getDate()}`;
+}
+
 const Feed = ({ feed }: { feed: FeedData }) => (
   <View gap={6} paddingTop={4}>
     {feed.map(
@@ -57,7 +65,9 @@ const Feed = ({ feed }: { feed: FeedData }) => (
                       {name!} got {pointsText(points!)}
                     </Text>
                   </View>
-                  <Text color="neutral-faded">Harvested on {created_at}</Text>
+                  <Text color="neutral-faded">
+                    Harvested on {dateText(created_at!)}
+                  </Text>
                 </View.Item>
               </View>
             </ActionBar>
