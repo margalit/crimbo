@@ -24,6 +24,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
+import NextImage from "next/image";
 
 type Entries<T> = {
   [K in keyof T]: [K, T[K]];
@@ -70,7 +71,7 @@ const players = {
 const feed = [
   {
     id: "17",
-    src: "/harvests/17.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/17.jpeg",
     claimant: "patA" as const,
     location: "Manning St, Oyster Bay",
     points: 1,
@@ -78,7 +79,7 @@ const feed = [
   },
   {
     id: "16",
-    src: "/harvests/16.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/16.jpeg",
     claimant: "chrisV" as const,
     location: "Normanby Ave, Thornbury",
     points: 1,
@@ -86,7 +87,7 @@ const feed = [
   },
   {
     id: "15",
-    src: "/harvests/15.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/15.jpeg",
     claimant: "chrisV" as const,
     location: "Darebin Rd, Thornbury",
     points: 1,
@@ -94,7 +95,7 @@ const feed = [
   },
   {
     id: "14",
-    src: "/harvests/14.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/14.jpeg",
     claimant: "chrisV" as const,
     location: "Mitchell St, Northcote",
     points: 1,
@@ -102,7 +103,7 @@ const feed = [
   },
   {
     id: "13",
-    src: "/harvests/13.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/13.jpeg",
     claimant: "joL" as const,
     location: "St Georges Rd, Thornbury",
     points: 1,
@@ -110,7 +111,7 @@ const feed = [
   },
   {
     id: "12",
-    src: "/harvests/12.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/12.jpeg",
     claimant: "jessH" as const,
     location: "Ballantyne St, Thornbury",
     points: 1,
@@ -118,7 +119,7 @@ const feed = [
   },
   {
     id: "11",
-    src: "/harvests/11.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/11.jpeg",
     claimant: "chrisM" as const,
     location: "Flinders St, Thornbury",
     points: 1,
@@ -126,7 +127,7 @@ const feed = [
   },
   {
     id: "10",
-    src: "/harvests/10.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/10.jpeg",
     claimant: "jessH" as const,
     location: "Near the train station, Thornbury",
     points: 1,
@@ -134,7 +135,7 @@ const feed = [
   },
   {
     id: "9",
-    src: "/harvests/9.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/9.jpeg",
     claimant: "maxW" as const,
     location: "Rennie St, Thornbury",
     points: 1,
@@ -142,7 +143,7 @@ const feed = [
   },
   {
     id: "8",
-    src: "/harvests/8.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/8.jpeg",
     claimant: "rubyB" as const,
     location: "Darebin St, Heidelberg",
     points: 1,
@@ -150,7 +151,7 @@ const feed = [
   },
   {
     id: "7",
-    src: "/harvests/7.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/7.jpeg",
     claimant: "samM" as const,
     location: "Franklin St, Coburg",
     points: 1,
@@ -158,7 +159,7 @@ const feed = [
   },
   {
     id: "6",
-    src: "/harvests/6.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/6.jpeg",
     claimant: "rubyB" as const,
     location: "Coburg",
     points: 1,
@@ -166,7 +167,7 @@ const feed = [
   },
   {
     id: "5",
-    src: "/harvests/5.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/5.jpeg",
     claimant: "rubyB" as const,
     location: "De Carle St, Coburg",
     points: 1,
@@ -174,7 +175,7 @@ const feed = [
   },
   {
     id: "4",
-    src: "/harvests/4.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/4.jpeg",
     claimant: "rubyB" as const,
     location: "Coburg North",
     points: 1,
@@ -182,7 +183,7 @@ const feed = [
   },
   {
     id: "3",
-    src: "/harvests/3.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/3.jpeg",
     claimant: "rubyB" as const,
     location: "Clayton",
     points: 1,
@@ -190,7 +191,7 @@ const feed = [
   },
   {
     id: "2",
-    src: "/harvests/2.jpeg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/2.jpeg",
     claimant: "rubyB" as const,
     location: "Outside Vinnies, Preston",
     points: 0.5,
@@ -198,7 +199,7 @@ const feed = [
   },
   {
     id: "1",
-    src: "/harvests/1.jpg",
+    src: "https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/1.jpg",
     claimant: "chrisV" as const,
     location: "Tumbarumba",
     points: 5,
@@ -282,45 +283,52 @@ const Home: NextPage = () => {
             </Tabs.List>
             <Tabs.Panel value="0">
               <View gap={6} paddingTop={4}>
-                {feed.map(({ id, src, claimant, location, date, points }) => (
-                  <Card key={id} padding={0}>
-                    <Overlay
-                      position="bottom"
-                      backgroundSlot={
-                        <AspectRatio ratio={1}>
-                          <Image
-                            src={src}
-                            alt="discarded christmas tree"
-                            width="100%"
-                          />
-                        </AspectRatio>
-                      }
-                    >
-                      <View direction="row" align="center" gap={1}>
-                        <MapPinIcon width={24} height={24} />
-                        <Text variant="title-3">{location}</Text>
-                      </View>
-                    </Overlay>
-                    <ActionBar>
-                      <View
-                        gap={3}
-                        align="center"
-                        direction="row"
-                        position="relative"
+                {feed.map(
+                  ({ id, src, claimant, location, date, points }, index) => (
+                    <Card key={id} padding={0}>
+                      <Overlay
+                        position="bottom"
+                        backgroundSlot={
+                          <AspectRatio ratio={1}>
+                            <NextImage
+                              src={src}
+                              width={546}
+                              height={546}
+                              alt="Discarded christmas tree"
+                              priority={index <= 1}
+                            />
+                          </AspectRatio>
+                        }
                       >
-                        <Avatar src={players[claimant].image} size={10} />
-                        <View.Item grow>
-                          <View align="center" direction="row" gap={1}>
-                            <Text variant="body-medium-1">
-                              {players[claimant].name} got {pointsText(points)}
+                        <View direction="row" align="center" gap={1}>
+                          <MapPinIcon width={24} height={24} />
+                          <Text variant="title-3">{location}</Text>
+                        </View>
+                      </Overlay>
+                      <ActionBar>
+                        <View
+                          gap={3}
+                          align="center"
+                          direction="row"
+                          position="relative"
+                        >
+                          <Avatar src={players[claimant].image} size={10} />
+                          <View.Item grow>
+                            <View align="center" direction="row" gap={1}>
+                              <Text variant="body-medium-1">
+                                {players[claimant].name} got{" "}
+                                {pointsText(points)}
+                              </Text>
+                            </View>
+                            <Text color="neutral-faded">
+                              Harvested on {date}
                             </Text>
-                          </View>
-                          <Text color="neutral-faded">Harvested on {date}</Text>
-                        </View.Item>
-                      </View>
-                    </ActionBar>
-                  </Card>
-                ))}
+                          </View.Item>
+                        </View>
+                      </ActionBar>
+                    </Card>
+                  )
+                )}
               </View>
             </Tabs.Panel>
             <Tabs.Panel value="1">
