@@ -1,16 +1,19 @@
-import { View, Text, Link } from "reshaped";
+import { View, Text, Link, AspectRatio } from "reshaped";
 import NextImage from "next/image";
 import HeroImage from "/public/hero.png";
 
 const About = () => (
   <View gap={6} paddingTop={4}>
     <View borderRadius="large" overflow="hidden">
-      <NextImage
-        src={HeroImage}
-        width={548}
-        priority
-        alt="Discarded christmas tree"
-      />
+      <AspectRatio ratio={16 / 9}>
+        <NextImage
+          src={HeroImage}
+          width={548}
+          priority
+          alt="Discarded christmas tree"
+          style={{ height: "auto" }}
+        />
+      </AspectRatio>
     </View>
     <Text variant="title-3">
       Crimbo is a game where each player tries to take photos of discarded
