@@ -5,6 +5,8 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import type { Session } from "@supabase/auth-helpers-react";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import type { AppProps } from "next/app";
+import { Container, View, Text } from "reshaped";
+import Navigation from "../components/Navigation";
 
 function MyApp({
   Component,
@@ -20,7 +22,17 @@ function MyApp({
       initialSession={pageProps.initialSession}
     >
       <Reshaped theme="reshaped" defaultColorMode="dark">
-        <Component {...pageProps} />
+        <Container width="580px">
+          <View gap={4} paddingTop={4} paddingBottom={12}>
+            <View align="center" direction="row">
+              <View.Item grow>
+                <Text variant="body-strong-1">Crimbo</Text>
+              </View.Item>
+              <Navigation />
+            </View>
+            <Component {...pageProps} />
+          </View>
+        </Container>
       </Reshaped>
     </SessionContextProvider>
   );
