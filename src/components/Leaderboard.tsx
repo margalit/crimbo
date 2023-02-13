@@ -3,8 +3,8 @@ import type { LeaderboardData } from "../pages";
 
 const Leaderboard = ({ leaderboard }: { leaderboard: LeaderboardData }) => (
   <View gap={4} paddingTop={4}>
-    {leaderboard.map(({ id, image, name, points, harvests }) => (
-      <Card key={id}>
+    {leaderboard.map(({ uuid, image, name, points, harvests }) => (
+      <Card key={uuid}>
         <View direction="row" align="center" gap={4}>
           <Avatar src={image!} size={12} />
           <View>

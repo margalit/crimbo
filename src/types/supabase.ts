@@ -17,6 +17,7 @@ export interface Database {
           image: string
           is_synthetic: boolean
           location: string
+          user: string | null
         }
         Insert: {
           claimant: number
@@ -25,6 +26,7 @@ export interface Database {
           image: string
           is_synthetic?: boolean
           location: string
+          user?: string | null
         }
         Update: {
           claimant?: number
@@ -33,6 +35,7 @@ export interface Database {
           image?: string
           is_synthetic?: boolean
           location?: string
+          user?: string | null
         }
       }
       players: {
@@ -41,18 +44,21 @@ export interface Database {
           id: number
           image: string
           name: string
+          uuid: string
         }
         Insert: {
           created_at?: string
           id?: number
           image: string
           name: string
+          uuid?: string
         }
         Update: {
           created_at?: string
           id?: number
           image?: string
           name?: string
+          uuid?: string
         }
       }
     }
@@ -71,10 +77,10 @@ export interface Database {
       leaderboard: {
         Row: {
           harvests: number | null
-          id: number | null
           image: string | null
           name: string | null
           points: number | null
+          uuid: string | null
         }
       }
       points: {

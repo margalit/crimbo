@@ -17,13 +17,11 @@ import { env } from "../env/client.mjs";
 export type FeedData = Database["public"]["Views"]["feed"]["Row"][];
 export type LeaderboardData =
   Database["public"]["Views"]["leaderboard"]["Row"][];
-export type ClaimentData = { name: string; value: string }[];
 
 const Home: NextPage<{
   feed: FeedData;
   leaderboard: LeaderboardData;
-  claiments: ClaimentData;
-}> = ({ feed, leaderboard, claiments }) => {
+}> = ({ feed, leaderboard }) => {
   return (
     <>
       <Head>
@@ -52,7 +50,7 @@ const Home: NextPage<{
             <View.Item grow>
               <Text variant="body-strong-1">Crimbo</Text>
             </View.Item>
-            <Navigation claiments={claiments} />
+            <Navigation />
           </View>
           <Tabs itemWidth="equal" variant="pills-elevated">
             <Tabs.List>
@@ -96,10 +94,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       feed,
       leaderboard,
-      claiments: leaderboard.map((u) => ({
-        label: u.name!,
-        value: `${u.id!}`,
-      })),
     },
     revalidate: 60,
   };

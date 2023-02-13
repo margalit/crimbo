@@ -12,9 +12,9 @@ const Navigation = () => {
       <Button.Aligner>
         <ColorModeButton />
       </Button.Aligner>
-      {/* <Button.Aligner>
+      <Button.Aligner>
         <UserAuth />
-      </Button.Aligner> */}
+      </Button.Aligner>
     </View>
   );
 };

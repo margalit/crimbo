@@ -5,10 +5,15 @@ const UserAuth = () => {
   const supabase = useSupabaseClient();
   const user = useUser();
 
+  const onSignIn = async () => {
+    await supabase.auth.signInWithOAuth({ provider: "google" });
+  };
+
+  const onSignOut = async () => {
+    await supabase.auth.signOut();
+  };
+
   if (user) {
-    const onSignOut = async () => {
-      await supabase.auth.signOut();
-    };
     const avatarUrl = user.user_metadata.avatar_url as string;
     return (
       <DropdownMenu position="bottom-end">
@@ -20,7 +25,7 @@ const UserAuth = () => {
           )}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <DropdownMenu.Item size="small" onClick={onSignOut}>
+          <DropdownMenu.Item size="small" onClick={() => void onSignOut()}>
             Sign out
           </DropdownMenu.Item>
         </DropdownMenu.Content>
@@ -28,13 +33,7 @@ const UserAuth = () => {
     );
   }
   return (
-    <Button
-      size="small"
-      variant="ghost"
-      onClick={async () =>
-        await supabase.auth.signInWithOAuth({ provider: "google" })
-      }
-    >
+    <Button size="small" variant="ghost" onClick={() => void onSignIn()}>
       Sign in
     </Button>
   );

@@ -38,7 +38,6 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
         image: upload.data.path,
         is_synthetic: formData.get("is_synthetic") === "true",
       });
-
       console.log(harvest);
     }
   };
@@ -56,22 +55,17 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
           <Dismissible onClose={deactivate} closeAriaLabel="Close modal">
             <Modal.Title>Submit harvest</Modal.Title>
           </Dismissible>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(event) => void onSubmit(event)}>
             <View gap={3}>
               <FormControl required>
                 <FormControl.Label>Image</FormControl.Label>
-                <TextField
-                  name="image"
-                  onChange={(args) => console.log(args)}
-                  inputAttributes={{ type: "file" }}
-                />
+                <TextField name="image" inputAttributes={{ type: "file" }} />
               </FormControl>
               <FormControl required>
                 <FormControl.Label>Location</FormControl.Label>
                 <TextField
                   name="location"
                   placeholder="Enter a street and suburb"
-                  onChange={(args) => console.log(args)}
                 />
               </FormControl>
               <FormControl group required>
