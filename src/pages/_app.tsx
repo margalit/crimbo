@@ -1,21 +1,28 @@
-import { Reshaped } from "reshaped";
 import "reshaped/themes/reshaped/theme.css";
-import { type AppType } from "next/app";
-import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
-import { api } from "../utils/api";
+import { Reshaped } from "reshaped";
+import { useState } from "react";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import type { Session } from "@supabase/auth-helpers-react";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import type { AppProps } from "next/app";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+function MyApp({
   Component,
-  pageProps: { session, ...pageProps },
-}) => {
+  pageProps,
+}: AppProps<{
+  initialSession: Session;
+}>) {
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+
   return (
-    <SessionProvider session={session}>
+    <SessionContextProvider
+      supabaseClient={supabase}
+      initialSession={pageProps.initialSession}
+    >
       <Reshaped theme="reshaped" defaultColorMode="dark">
         <Component {...pageProps} />
       </Reshaped>
-    </SessionProvider>
+    </SessionContextProvider>
   );
-};
-
-export default api.withTRPC(MyApp);
+}
+export default MyApp;

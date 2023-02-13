@@ -14,9 +14,9 @@ import type { FeedData } from "../pages";
 function pointsText(points: number) {
   switch (points) {
     case 0.5:
-      return `half a point`;
+      return "half a point";
     case 1:
-      return `a point`;
+      return "a point";
     default:
       return `${points} points`;
   }
@@ -41,7 +41,7 @@ const Feed = ({ feed }: { feed: FeedData }) => (
               backgroundSlot={
                 <AspectRatio ratio={1}>
                   <NextImage
-                    src={image!}
+                    src={`https://edgkqxmiesphykcasdll.supabase.co/storage/v1/object/public/harvests/${image!}`}
                     width={548}
                     height={548}
                     alt="Discarded christmas tree"

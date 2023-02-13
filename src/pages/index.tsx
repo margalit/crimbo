@@ -1,4 +1,4 @@
-import { type GetServerSideProps, type NextPage } from "next";
+import { type GetStaticProps, type NextPage } from "next";
 import { Container, View, Text, Tabs } from "reshaped";
 import {
   TrophyIcon,
@@ -12,15 +12,18 @@ import Leaderboard from "../components/Leaderboard";
 import Navigation from "../components/Navigation";
 import { supabase } from "../lib/supabaseClient";
 import type { Database } from "../types/supabase";
+import { env } from "../env/client.mjs";
 
 export type FeedData = Database["public"]["Views"]["feed"]["Row"][];
 export type LeaderboardData =
   Database["public"]["Views"]["leaderboard"]["Row"][];
+export type ClaimentData = { name: string; value: string }[];
 
 const Home: NextPage<{
   feed: FeedData;
   leaderboard: LeaderboardData;
-}> = ({ feed, leaderboard }) => {
+  claiments: ClaimentData;
+}> = ({ feed, leaderboard, claiments }) => {
   return (
     <>
       <Head>
@@ -40,9 +43,7 @@ const Home: NextPage<{
         />
         <meta
           name="og:image"
-          content={`${
-            process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-          }/hero.png`}
+          content={`https://${env.NEXT_PUBLIC_URL}/hero.png`}
         />
       </Head>
       <Container width="580px">
@@ -51,7 +52,7 @@ const Home: NextPage<{
             <View.Item grow>
               <Text variant="body-strong-1">Crimbo</Text>
             </View.Item>
-            <Navigation />
+            <Navigation claiments={claiments} />
           </View>
           <Tabs itemWidth="equal" variant="pills-elevated">
             <Tabs.List>
@@ -81,13 +82,11 @@ const Home: NextPage<{
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { data: feed } = await supabase.from("feed").select("*");
   const { data: leaderboard } = await supabase.from("leaderboard").select("*");
 
-  console.log(leaderboard);
-
-  if (!feed || !leaderboard) {
+  if (!(feed && leaderboard)) {
     return {
       notFound: true,
     };
@@ -97,7 +96,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       feed,
       leaderboard,
+      claiments: leaderboard.map((u) => ({
+        label: u.name!,
+        value: `${u.id!}`,
+      })),
     },
+    revalidate: 60,
   };
 };
 

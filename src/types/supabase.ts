@@ -15,24 +15,24 @@ export interface Database {
           created_at: string
           id: number
           image: string
+          is_synthetic: boolean
           location: string
-          points: number
         }
         Insert: {
           claimant: number
           created_at?: string
           id?: number
           image: string
+          is_synthetic?: boolean
           location: string
-          points: number
         }
         Update: {
           claimant?: number
           created_at?: string
           id?: number
           image?: string
+          is_synthetic?: boolean
           location?: string
-          points?: number
         }
       }
       players: {
@@ -77,11 +77,20 @@ export interface Database {
           points: number | null
         }
       }
+      points: {
+        Row: {
+          harvest_id: number | null
+          total: number | null
+        }
+      }
     }
     Functions: {
       [_ in never]: never
     }
     Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
       [_ in never]: never
     }
   }

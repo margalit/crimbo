@@ -1,10 +1,20 @@
 import { Button, View, useTheme } from "reshaped";
 import { MoonIcon, SunIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import SubmitHarvest from "../components/SubmitHarvest";
+import { useUser } from "@supabase/auth-helpers-react";
+import UserAuth from "./UserAuth";
 
 const Navigation = () => {
+  const user = useUser();
   return (
-    <View justify="end" align="center" direction="row" gap={3}>
-      <ColorModeButton />
+    <View justify="end" align="center" direction="row" gap={3} height={8}>
+      {user && <SubmitHarvest user={user} />}
+      <Button.Aligner>
+        <ColorModeButton />
+      </Button.Aligner>
+      {/* <Button.Aligner>
+        <UserAuth />
+      </Button.Aligner> */}
     </View>
   );
 };
@@ -14,7 +24,7 @@ const ColorModeButton = () => {
   if (colorMode === "dark") {
     return (
       <Button
-        variant="outline"
+        variant="ghost"
         size="small"
         onClick={() => setColorMode("light")}
         startIcon={<SunIcon />}
@@ -26,7 +36,7 @@ const ColorModeButton = () => {
   }
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="small"
       onClick={() => setColorMode("dark")}
       startIcon={<MoonIcon />}
