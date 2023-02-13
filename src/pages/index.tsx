@@ -95,7 +95,6 @@ export const getStaticProps: GetStaticProps = async () => {
       feed,
       leaderboard,
     },
-    revalidate: 60,
   };
 };
 
