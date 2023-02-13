@@ -9,6 +9,7 @@ import {
   FormControl,
   RadioGroup,
   Radio,
+  useToast,
 } from "reshaped";
 import { supabase } from "../lib/supabaseClient";
 import { uuid } from "uuidv4";
@@ -19,26 +20,30 @@ interface SubmitHarvestProps {
 
 const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
   const { active, activate, deactivate } = useToggle(false);
+  const toast = useToast();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const image = formData.get("image") as File;
-    console.log(image.name, user);
 
     const upload = await supabase.storage
       .from("harvests")
       .upload(uuid(), image);
 
     if (upload.data) {
-      const harvest = await supabase.from("harvests").insert({
+      await supabase.from("harvests").insert({
         claimant: 1,
         user: user.id,
         location: formData.get("location") as string,
         image: upload.data.path,
         is_synthetic: formData.get("is_synthetic") === "true",
       });
-      console.log(harvest);
+
+      deactivate();
+      toast.show({
+        text: "Harvest submitted!",
+      });
     }
   };
   return (
