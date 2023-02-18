@@ -58,6 +58,12 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
   const insert = useSWRMutation("insert", insertHarvest);
   const toast = useToast();
 
+  function closeModal() {
+    upload.reset();
+    insert.reset();
+    deactivate();
+  }
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -79,7 +85,8 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
           text: "Harvest submitted!",
           position: "top",
         });
-        deactivate();
+
+        closeModal();
       }
     } catch (err) {
       toast.show({
@@ -104,11 +111,11 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
       </Button>
       <Modal
         active={active}
-        onClose={deactivate}
+        onClose={closeModal}
         position={{ s: "bottom", m: "center" }}
       >
         <View gap={2}>
-          <Dismissible onClose={deactivate} closeAriaLabel="Close modal">
+          <Dismissible onClose={closeModal} closeAriaLabel="Close modal">
             <Modal.Title>Submit harvest</Modal.Title>
           </Dismissible>
           {error && (
