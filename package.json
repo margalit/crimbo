@@ -29,6 +29,7 @@
     "reshaped": "file:vendor/reshaped-react-v1.11.0.tgz",
     "supabase": "^1.34.5",
     "superjson": "1.9.1",
+    "swr": "^2.0.3",
     "uuidv4": "^6.2.13",
     "zod": "^3.20.2"
   },

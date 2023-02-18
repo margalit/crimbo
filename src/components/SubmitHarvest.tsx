@@ -13,17 +13,22 @@ import {
 } from "reshaped";
 import { supabase } from "../lib/supabaseClient";
 import { uuid } from "uuidv4";
+import { useData } from "../pages";
+import { useState } from "react";
 
 interface SubmitHarvestProps {
   user: User;
 }
 
 const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { active, activate, deactivate } = useToggle(false);
+  const { mutate } = useData();
   const toast = useToast();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.currentTarget);
     const image = formData.get("image") as File;
 
@@ -40,10 +45,15 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
         is_synthetic: formData.get("is_synthetic") === "true",
       });
 
-      deactivate();
+      setIsLoading(false);
+
       toast.show({
         text: "Harvest submitted!",
       });
+
+      await mutate();
+
+      deactivate();
     }
   };
   return (
@@ -81,7 +91,9 @@ const SubmitHarvest = ({ user }: SubmitHarvestProps) => {
                   </View>
                 </RadioGroup>
               </FormControl>
-              <Button type="submit">Submit</Button>
+              <Button loading={isLoading} disabled={isLoading} type="submit">
+                Submit
+              </Button>
             </View>
           </form>
         </View>

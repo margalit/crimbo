@@ -1,4 +1,4 @@
-import { View, Text, Link, AspectRatio } from "reshaped";
+import { View, Text, AspectRatio } from "reshaped";
 import NextImage from "next/image";
 import HeroImage from "/public/hero.png";
 
@@ -46,9 +46,7 @@ const About = () => (
     <View gap={1}>
       <Text variant="title-3">Can I play?</Text>
       <Text variant="body-1">
-        Sure! The feed is currently manual so please send harvests via{" "}
-        <Link href="mailto:sam@margalit.com.au">email</Link>. Please include a
-        location so I can verify it’s uniqueness!
+        Absolutely! Sign in with your Google account and start harvesting.
       </Text>
     </View>
   </View>

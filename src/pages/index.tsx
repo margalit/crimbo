@@ -1,4 +1,4 @@
-import { type GetStaticProps, type NextPage } from "next";
+import { type GetServerSideProps, type NextPage } from "next";
 import { Text, Tabs } from "reshaped";
 import {
   TrophyIcon,
@@ -11,15 +11,18 @@ import Leaderboard from "../components/Leaderboard";
 import { supabase } from "../lib/supabaseClient";
 import type { Database } from "../types/supabase";
 import Head from "next/head";
+import useSWR from "swr";
 
 export type FeedData = Database["public"]["Views"]["feed"]["Row"][];
 export type LeaderboardData =
   Database["public"]["Views"]["leaderboard"]["Row"][];
 
-const Home: NextPage<{
+export interface Data {
   feed: FeedData;
   leaderboard: LeaderboardData;
-}> = ({ feed, leaderboard }) => {
+}
+
+const Home: NextPage<Data> = () => {
   return (
     <>
       <Head>
@@ -41,21 +44,31 @@ const Home: NextPage<{
           <About />
         </Tabs.Panel>
         <Tabs.Panel value="1">
-          <Feed feed={feed} />
+          <Feed />
         </Tabs.Panel>
         <Tabs.Panel value="2">
-          <Leaderboard leaderboard={leaderboard} />
+          <Leaderboard />
         </Tabs.Panel>
       </Tabs>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getData() {
   const { data: feed } = await supabase.from("feed").select("*");
   const { data: leaderboard } = await supabase.from("leaderboard").select("*");
+  return {
+    feed,
+    leaderboard,
+  };
+}
 
-  if (!(feed && leaderboard)) {
+export const useData = () => useSWR("data", getData);
+
+export const getStaticProps: GetServerSideProps = async () => {
+  const data = await getData();
+
+  if (!data) {
     return {
       notFound: true,
     };
@@ -63,8 +76,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      feed,
-      leaderboard,
+      fallback: {
+        data,
+      },
     },
   };
 };
