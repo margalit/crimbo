@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { env } from "../env/client.mjs";
 
 export default function Document() {
   return (
@@ -18,10 +17,7 @@ export default function Document() {
           name="og:description"
           content="Crimbo is a game where each player tries to take photos of discarded Christmas trees."
         />
-        <meta
-          name="og:image"
-          content={`https://${env.NEXT_PUBLIC_URL}/hero.png`}
-        />
+        <meta name="og:image" content="https://crimbo.app/hero.png" />
       </Head>
       <body data-rs-theme="reshaped-dark">
         <Main />
