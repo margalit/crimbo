@@ -2,6 +2,7 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { usePathname, useRouter } from "next/navigation";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import styles from "./Navigation.module.css";
 
 import {
@@ -108,7 +109,12 @@ export default function Navigation() {
       </View>
 
       <Modal active={active} onClose={deactivate} position="bottom">
-        <form action={addPost}>
+        <form
+          action={async (formData) => {
+            await addPost(formData);
+            deactivate();
+          }}
+        >
           <View gap={4}>
             <FormControl required>
               <FormControl.Label>Image</FormControl.Label>
@@ -129,10 +135,19 @@ export default function Navigation() {
                 </View>
               </RadioGroup>
             </FormControl>
-            <Button type="submit">Submit</Button>
+            <SubmitButton />
           </View>
         </form>
       </Modal>
     </>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button disabled={pending} type="submit">
+      Submit
+    </Button>
   );
 }
