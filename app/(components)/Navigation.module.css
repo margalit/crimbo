@@ -8,7 +8,7 @@
   border-left: 1px solid var(--rs-color-border-neutral-faded);
 }
 
-.item::last-child {
+.item:first-child {
   border-left: 0;
 }
 

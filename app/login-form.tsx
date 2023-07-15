@@ -25,16 +25,27 @@ export default function LoginForm({ session }: { session: Session | null }) {
     router.refresh();
   };
 
-  return session ? (
+  return (
     <View direction="row" align="center" gap={3}>
-      <Button variant="outline" size="small" onClick={handleSignOut}>
-        Sign out
+      <Button
+        variant="outline"
+        size="small"
+        onClick={() => router.push("/faq")}
+      >
+        FAQ
       </Button>
-      <Avatar src={session.user.user_metadata.avatar_url} size={8} />
+      {session ? (
+        <>
+          <Button variant="outline" size="small" onClick={handleSignOut}>
+            Sign out
+          </Button>
+          <Avatar src={session.user.user_metadata.avatar_url} size={8} />
+        </>
+      ) : (
+        <Button variant="outline" size="small" onClick={handleSignIn}>
+          Sign in
+        </Button>
+      )}
     </View>
-  ) : (
-    <Button variant="outline" size="small" onClick={handleSignIn}>
-      Sign in
-    </Button>
   );
 }
