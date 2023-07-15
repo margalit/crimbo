@@ -1,0 +1,27 @@
+.root {
+  border-top: 1px solid var(--rs-color-border-neutral-faded);
+}
+
+.item {
+  position: relative;
+  color: var(--rs-color-foreground-neutral-faded);
+  border-left: 1px solid var(--rs-color-border-neutral-faded);
+}
+
+.item::last-child {
+  border-left: 0;
+}
+
+.active {
+  color: var(--rs-color-foreground-neutral);
+}
+
+.active::after {
+  background-color: var(--rs-color-border-primary);
+  content: "";
+  height: 2px;
+  inset-inline: 0;
+  top: -1px;
+  z-index: var(--rs-z-index-fixed);
+  position: absolute;
+}
