@@ -1,4 +1,4 @@
-import Login from "./login";
+import Login from "./Login";
 import { Icon, View } from "reshaped";
 import { LogoIcon } from "./Icons";
 import styles from "./Header.module.css";

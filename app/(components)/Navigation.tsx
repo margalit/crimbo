@@ -129,7 +129,7 @@ export default function Navigation() {
                 </View>
               </RadioGroup>
             </FormControl>
-            <Button>Submit</Button>
+            <Button type="submit">Submit</Button>
           </View>
         </form>
       </Modal>
