@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 import type { Database } from "@/lib/database.types";
+import { randomUUID } from "crypto";
 
 export const addPost = async (formData: FormData) => {
   "use server";
@@ -25,7 +26,7 @@ export const addPost = async (formData: FormData) => {
   // Upload image
   const upload = await supabase.storage
     .from("harvests")
-    .upload("abc123", image);
+    .upload(randomUUID(), image);
   if (upload.error) throw upload.error;
 
   // Insert harvest
