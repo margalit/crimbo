@@ -1,14 +1,17 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createBrowserClient } from "@supabase/ssr";
+import { Session } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
-import type { Session } from "@supabase/auth-helpers-nextjs";
 import { Avatar, Button, View } from "reshaped";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({

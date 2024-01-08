@@ -1,6 +1,5 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import styles from "./Navigation.module.css";
@@ -20,6 +19,7 @@ import {
 } from "reshaped";
 import { addPost } from "../postActions";
 import { FeedIcon, ScoresIcon, PostIcon } from "./Icons";
+import { createBrowserClient } from "@supabase/ssr";
 
 function NavigationItem({
   isActive,
@@ -57,7 +57,10 @@ export default function Navigation() {
 
   const router = useRouter();
   const pathname = usePathname();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const handlePost = async () => {
     const { data } = await supabase.auth.getSession();

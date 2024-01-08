@@ -1,13 +1,22 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 import type { Database } from "@/lib/database.types";
 import { Avatar, Card, View, Text } from "reshaped";
+import { createServerClient } from "@supabase/ssr";
 
 export default async function ServerComponent() {
-  const supabase = createServerComponentClient<Database>({
-    cookies,
-  });
+  const cookieStore = cookies();
+  const supabase = createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+      },
+    }
+  );
   const { data: leaderboard } = await supabase.from("leaderboard").select("*");
 
   return (
