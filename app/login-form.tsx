@@ -14,13 +14,17 @@ export default function LoginForm({ session }: { session: Session | null }) {
   );
 
   const handleSignIn = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
-    });
-    router.refresh();
+    try {
+      const response = await fetch("/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      const { data } = await response.json();
+      if (!data?.url) throw new Error("No url returned");
+      router.push(data.url);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSignOut = async () => {

@@ -23,7 +23,6 @@ export default function Header() {
         <Icon size={5} svg={<LogoIcon />} />
       </View.Item>
       <View.Item>
-        {/* @ts-expect-error next version of TS will fix this */}
         <Login />
       </View.Item>
     </View>
